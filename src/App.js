@@ -4,8 +4,7 @@ import { Card, Container } from "@mui/material";
 import axios from "axios";
 
 const constituentsApiUrl = "https://us-staging-api.hubbub.net/v1/constituent";
-const JWT =
-  "eyJraWQiOiJrT3kxcmloT0dFMEliRlloeWV1WFI2WnlzS1RJNEFUZDVjY3ZscnV6VXFvPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI3ZDRlMjE1OC1jZmZhLTQyYmItOWIxYy04YmI1M2E5ZGJiMGMiLCJldmVudF9pZCI6ImJmYzM2OThiLWQ1NDgtNDczMS05YTU1LTg1YWRhMTQzMWViOCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NzU3ODIzMTUsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX0JOMFRKaEJjVCIsImV4cCI6MTY3NTc4NTkxNSwiaWF0IjoxNjc1NzgyMzE1LCJqdGkiOiI1MzkwZmE3Ny1hM2YzLTQ0ODYtOGQ3Zi0zMDA4ZmVkMWNhMWYiLCJjbGllbnRfaWQiOiIyMnZ1NGU1bXBwczlnMG8yY3UxMWduZnYxMiIsInVzZXJuYW1lIjoiN2Q0ZTIxNTgtY2ZmYS00MmJiLTliMWMtOGJiNTNhOWRiYjBjIn0.stftqhXMVYxAum7xwjKjsfVABgunJZPBXUpQIgopC-oKHB30WMbFg9QbNZwzdWySHtguHn6oD7HvuBSaPfSdlA3i4clpeHJv4WqIP1RNiKFIp75tSxrIimkJGN5kTTbbAHZ6rxlM3F3Z7dY1lBBCcKziIFd2-igd5UwUo30PF1Xogn7UvxYCUe7GDsluFVFSNyCCgvfFhD4hgJ9-9GyttQAmJd2qAVDvut3-P7iuk2ybkjFntJdFguqrLgSmdHvs2J4fva3Y0cNBiD7KArgBRio20QWstLVzhBT3vPbIvk4F-9f8CQgYBQBA0jouPodHK7FCQxzd1LPvTvy-FZc1qw";
+const JWT = "";
 axios.defaults.headers.common["Authorization"] = `Bearer ${JWT}`;
 
 // const rows = [
@@ -47,6 +46,8 @@ export default function App() {
 
   const columns = [...default_columns, ...additional_columns];
 
+  // THINGS SHOULD BE SLIGHTLY FASTER WHEN WE GET THE DATA IN THE RIGHT FORMAT FROM THE API
+  // AND WE DON'T HAVE TO DO THIS
   const formatColums = (cols) => {
     return cols.map((col) => {
       return { field: col.name, headerName: col.label };
