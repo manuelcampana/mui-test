@@ -22,7 +22,7 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${JWT}`;
 //   { id: 3, col1: "MUI", col2: "is Amazing" },
 // ];
 
-export default function App() {
+export default function New() {
   const [constituents, setConstituents] = React.useState([]);
   const [additional_columns, setAdditionalColumns] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -80,25 +80,27 @@ export default function App() {
       .finally(() => {
         console.timeEnd("Rensponse Time");
         setLoading(false);
+        dataFetchedRef.current = false;
       });
   }, [page, pageSize]);
 
   return (
     <Container fixed>
-      <Card style={{ marginTop: 50, height: "calc(100vh - 1000px)" }}>
+      <Card style={{ marginTop: 50, height: "calc(100vh - 150px)" }}>
         <DataGrid
           disableColumnResize={false}
           rows={constituents}
           getRowId={(row) => row.email}
           columns={columns}
           loading={loading}
-          // pagination
+          pagination
+          rowCount={1000}
           // page={page}
           // rowsPerPageOptions={[100, 500, 1000]}
           // pageSize={pageSize}
           paginationMode="server"
-          // onPageChange={(newPage) => setPage(newPage)}
-          // onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          onPageChange={(newPage) => setPage(newPage)}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           hideFooterPagination
           checkboxSelection
           components={{ Toolbar: GridToolbar }}
