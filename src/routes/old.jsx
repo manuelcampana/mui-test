@@ -33,6 +33,8 @@ export default function Old() {
   const options = {
     filterType: "checkbox",
     tableBodyHeight: "calc(100vh - 300px)",
+    rowsPerPage: 1000,
+    rowsPerPageOptions: [100, 1000, 10000],
   };
 
   const dataFetchedRef = React.useRef(false);

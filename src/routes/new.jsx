@@ -25,6 +25,7 @@ export default function New() {
   const [additional_columns, setAdditionalColumns] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
+  const [rowCount, setRowCount] = React.useState(0);
   const [page, setPage] = React.useState(1);
   const [pageSize, setPageSize] = React.useState(100);
 
@@ -63,13 +64,15 @@ export default function New() {
     axios
       .get(REACT_APP_CONSTITUENTS_API_URL, {
         params: {
-          page: page,
-          page_size: 10000, // FIXME: this should be pageSize
+          page: 1,
+          page_size: 10000,
         },
       })
       .then((res) => {
         console.log("FETCHED:", res.data);
         setConstituents([...res.data.constituents]);
+        // setRowCount(res.data.pagination.total_items);
+        setRowCount(res.data.constituents.length);
         setAdditionalColumns(formatColums(res.data.meta.additional_columns));
       })
       .catch((err) => {
@@ -80,7 +83,7 @@ export default function New() {
         setLoading(false);
         dataFetchedRef.current = false;
       });
-  }, [page, pageSize]);
+  }, []);
 
   return (
     <Container fixed>
@@ -92,14 +95,14 @@ export default function New() {
           columns={columns}
           loading={loading}
           pagination
-          rowCount={1000}
-          // page={page}
-          // rowsPerPageOptions={[100, 500, 1000]}
-          // pageSize={pageSize}
+          rowCount={rowCount}
+          page={page}
+          rowsPerPageOptions={[100, 1000, 10000]}
+          pageSize={pageSize}
           paginationMode="server"
           onPageChange={(newPage) => setPage(newPage)}
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-          hideFooterPagination
+          // hideFooterPagination
           checkboxSelection
           components={{ Toolbar: GridToolbar }}
           componentsProps={{
